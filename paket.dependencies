@@ -1,0 +1,9 @@
+source https://www.nuget.org/api/v2
+strategy: min
+framework: netstandard20, netcore20
+
+nuget FluentAssertions
+#nuget Microsoft.NETCore.App ~2
+nuget Microsoft.NETCore.Platforms > 2 strategy: max
+nuget NUnit
+nuget NUnit3TestAdapter

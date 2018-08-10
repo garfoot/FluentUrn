@@ -1,0 +1,12 @@
+﻿type project
+id Garfoot.Utilities.FluentUrn
+version 1.0.0
+licenseUrl http://opensource.org/licenses/MIT
+authors Robert Garfoot
+owners Robert Garfoot
+language en-GB
+projectUrl https://github.com/garfoot/FluentUrn
+copyright 2018 Robert Garfoot
+tags urn fluent
+description
+	A simple URN building and parsing library with a fluent interface.
