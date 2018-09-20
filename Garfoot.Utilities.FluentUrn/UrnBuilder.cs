@@ -44,6 +44,19 @@ namespace Garfoot.Utilities.FluentUrn
         }
 
         /// <summary>
+        ///     Add a custom namespace specific string to the URN.
+        /// </summary>
+        /// <typeparam name="TNss">The type of NSS to add.</typeparam>
+        /// <param name="content">The NSS to add that contains the content for the URN.</param>
+        /// <returns></returns>
+        public IBuildableUrn WithCustomNss<TNss>(TNss content)
+            where TNss : NamespaceSpecificString
+        {
+            this.namespaceSpecificString = content;
+            return this;
+        }
+
+        /// <summary>
         ///     Build the <see cref="Urn"/>.
         /// </summary>
         /// <returns>A new URN object.</returns>

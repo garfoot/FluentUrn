@@ -65,9 +65,10 @@ namespace Garfoot.Utilities.FluentUrn
         protected bool IsValid(string content) => this.contentRegex.Match(content).Value == content;
 
         protected string Escape(string content) => content.Replace("%%", Symbols.Percent)
-            .Replace("/", Symbols.Slash)
-            .Replace("?", Symbols.Question)
-            .Replace("#", Symbols.Octothorpe);
+                                                          .Replace("/", Symbols.Slash)
+                                                          .Replace("?", Symbols.Question)
+                                                          .Replace("#", Symbols.Octothorpe)
+                                                          .Replace(" ", Symbols.Space);
 
         /// <summary>
         ///     Returns the <see cref="UnEscapedValue" /> of the NSS. To get the escaped value use <see cref="EscapedValue" />.
@@ -81,6 +82,7 @@ namespace Garfoot.Utilities.FluentUrn
             public const string Slash = "%2F";
             public const string Question = "%3F";
             public const string Octothorpe = "%23";
+            public const string Space = "%20";
         }
     }
 }

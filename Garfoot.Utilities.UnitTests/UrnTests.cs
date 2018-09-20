@@ -67,5 +67,13 @@ namespace Garfoot.Utilities.UnitTests
 
             urn.EscapedValue.Should().BeEquivalentTo("urn:any-namespace:item1:item2");
         }
+
+        [Test]
+        public void Parse_GenericNss_ReturnsUrn()
+        {
+            Urn urn = Urn.Parse<SectionedNamespaceSpecificString>("urn:anyId:section1:section2");
+
+            urn.UnEscapedValue.Should().Be("urn:anyId:section1:section2");
+        }
     }
 }

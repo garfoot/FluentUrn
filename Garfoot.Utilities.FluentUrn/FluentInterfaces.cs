@@ -16,6 +16,15 @@ namespace Garfoot.Utilities.FluentUrn
         /// <param name="content">The content sections to add.</param>
         /// <returns></returns>
         ISectionedContent WithSectionedContent(params string[] content);
+
+        /// <summary>
+        ///     Add a custom namespace specific string to the URN.
+        /// </summary>
+        /// <typeparam name="TNss">The type of NSS to add.</typeparam>
+        /// <param name="content">The NSS to add that contains the content for the URN.</param>
+        /// <returns></returns>
+        IBuildableUrn WithCustomNss<TNss>(TNss content)
+            where TNss : NamespaceSpecificString;
     }
 
     public interface IRawUrn : IBuildableUrn

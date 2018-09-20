@@ -31,6 +31,11 @@ namespace Garfoot.Utilities.FluentUrn
 
         private readonly NamespaceSpecificString content;
 
+        /// <summary>
+        ///     Create a new URN.
+        /// </summary>
+        /// <param name="namespaceIdentifier">The namespace identifier.</param>
+        /// <param name="content">A <see cref="NamespaceSpecificString"/>.</param>
         public Urn(string namespaceIdentifier, NamespaceSpecificString content)
         {
             if (!IsValidNamespaceId(namespaceIdentifier))
@@ -45,6 +50,33 @@ namespace Garfoot.Utilities.FluentUrn
             this.EscapedValue = $"urn:{this.NamespaceIdentifier}:{GetContent<NamespaceSpecificString>()?.EscapedValue}";
         }
 
+        /// <summary>
+        ///     Parse a new URN from a given source.
+        /// </summary>
+        /// <typeparam name="TNss">The type of namespace specific string (NSS) to parse.</typeparam>
+        /// <param name="source">The source URN.</param>
+        /// <returns>A new <see cref="Urn"/> instance.</returns>
+        public static Urn Parse<TNss>(string source)
+            where TNss : NamespaceSpecificString, INamespaceSpecificStringParser, new()
+        {
+            return Parse(source, content =>
+            {
+                var instance = Activator.CreateInstance<TNss>();
+                instance.Parse(content);
+                return instance;
+            });
+        }
+
+        /// <summary>
+        ///     Parse a URN from a given source. Call into an NSS factory to control parsing of the
+        ///     namespace specific string.
+        /// </summary>
+        /// <param name="source">The source URN.</param>
+        /// <param name="nssFactory">
+        ///     A factory method that will create and parse into a namespace specific
+        ///     string (NSS). Default is null which will use a <see cref="RawNamespaceSpecificString"/>.
+        /// </param>
+        /// <returns></returns>
         public static Urn Parse(string source, Func<string, NamespaceSpecificString> nssFactory = null)
         {
             string[] strings = source.Split(new[] {':'}, 3);
